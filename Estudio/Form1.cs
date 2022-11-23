@@ -112,16 +112,46 @@ namespace Estudio
 
         private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms.OfType<CadastroModalidade>().Count() == 0) { 
             CadastroModalidade cadastroModalidade = new CadastroModalidade();
             cadastroModalidade.MdiParent = this;
             cadastroModalidade.Show();
+            }
         }
 
         private void aTUALToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms.OfType<AttModalidade>().Count() == 0)
+            { 
             AttModalidade att = new AttModalidade();
             att.MdiParent = this;
             att.Show();
+            }
+        }
+
+        private void excluirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(Application.OpenForms.OfType<ExcluirModalidade>().Count() == 0)
+            { 
+            ExcluirModalidade exc = new ExcluirModalidade();
+            exc.MdiParent = this;
+            exc.Show();
+            }
+        }
+
+        private void modalidadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cadastrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<TurmaCadastro>().Count() == 0)
+            {
+                TurmaCadastro cad = new TurmaCadastro();
+                cad.MdiParent = this;
+                cad.Show();
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Estudio
             int nomeMol = 0;
             if (comboBoxModalidade.SelectedIndex == 0)
                 nomeMol = 1;
-            Modalidade modalidade = new Modalidade(comboBoxModalidade.Text, txtBoxDescricao.Text, maskedTextBoxPreco.Text, maskedTextBoxAlunos.Text, maskedTextBoxAulas.Text);
+            Modalidade modalidade = new Modalidade(comboBoxModalidade.Text, txtBoxDescricao.Text, float.Parse(maskedTextBoxPreco.Text.Replace(".", ",")), int.Parse(maskedTextBoxAlunos.Text),int.Parse (maskedTextBoxAulas.Text));
             try {
                 if (modalidade.CadModalidade())
                     MessageBox.Show("Modalidade cadastrado!");
@@ -39,6 +39,16 @@ namespace Estudio
         private void comboBoxModalidade_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void maskedTextBoxPreco_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void txtBoxDescricao_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

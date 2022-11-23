@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Estudio
 {
@@ -12,11 +13,14 @@ namespace Estudio
 
         private string Nome;
         private string Descricao;
-        private string Preco;
-        private string QntdAlunos;
-        private string QntdAulas;
+        private float Preco;
+        private int QntdAlunos;
+        private int QntdAulas;
+        private int Id;
 
-        public Modalidade(string nome, string descricao, string preco, string qntdAlunos, string qntdAulas)
+        public int IdModalidade { get => Id; set => Id = value; }
+
+        public Modalidade(string nome, string descricao, float preco, int qntdAlunos, int qntdAulas)
         {
             DAO_Conexao.getConexao("143.106.241.3", "cl201176", "cl201176", "cl*17122005");
             SetNome(nome);
@@ -27,7 +31,7 @@ namespace Estudio
         }
         public Modalidade(string nome)
         {
-            SetNome(nome);
+            Nome = nome;
         }
 
 
@@ -53,33 +57,33 @@ namespace Estudio
             return this.Descricao;
         }
 
-        public void SetPreco(string Preco)
+        public void SetPreco(float Preco)
         {
             this.Preco = Preco;
         }
 
-        public string GetPreco()
+        public float GetPreco()
         {
             return this.Preco;
         }
 
-        public void SetQntdAlunos(string QntdAlunos)
+        public void SetQntdAlunos(int QntdAlunos)
         {
             this.QntdAlunos = QntdAlunos;
         }
 
-        public string GetQntdAlunos()
+        public int GetQntdAlunos()
         {
             return this.QntdAlunos;
         }
 
 
-        public void SetQntdAulas(string QntdAulas)
+        public void SetQntdAulas(int QntdAulas)
         {
             this.QntdAulas = QntdAulas;
         }
 
-        public string GetQntdAulas()
+        public int GetQntdAulas()
         {
             return this.QntdAulas;
         }
@@ -89,6 +93,30 @@ namespace Estudio
         public Modalidade()
         {
 
+        }
+
+        //Excluir
+
+        public bool ExcluirModalidade()
+        {
+            bool exc = false;
+            try
+            {
+                DAO_Conexao.con.Open();
+                MySqlCommand exclui = new MySqlCommand("UPDATE Estudio_Modalidade SET ativo " + "= 1 WHERE Nome ='" + Nome + "'", DAO_Conexao.con);
+                exclui.ExecuteNonQuery();
+                exc = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
+            }
+            finally
+            {
+                DAO_Conexao.con.Close();
+            }
+            return exc;
         }
 
         // cadastro da modalidade no banco
@@ -113,31 +141,32 @@ namespace Estudio
             return cadastro; //retorna o estado do cadastro
         }
 
-        // consultar modalidade
-        public bool consultarModalidade()
+
+        public bool attModalidade()
         {
-            bool existe = false;
+            bool atualizar = false;
             try
             {
                 DAO_Conexao.con.Open();
-                MySqlCommand consultar = new MySqlCommand("SELECT * from Estudio_Modalidade" + "WHERE Nome '" + Nome + "'", DAO_Conexao.con);
-                MySqlDataReader resultado = consultar.ExecuteReader();
-                if (resultado.Read())
-                {
-                    existe = true;
-                }
+                string sql = "UPDATE Estudio_Modalidade set Nome ='" + Nome +"', Descricao ='" + Descricao + "', Preco ='" + Preco + "', QntdAlunos ='" + QntdAlunos + "', QntdAulas ='"+ QntdAulas + "' WHERE Nome ='" + Nome + "' limit 1";
+                MySqlCommand confirmar = new MySqlCommand(sql, DAO_Conexao.con);
+                confirmar.ExecuteNonQuery();
+                atualizar = true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
             finally
             {
                 DAO_Conexao.con.Close();
             }
 
-            return existe;
+            return atualizar;
         }
+    
+
+        }
+        
 
     }
-}

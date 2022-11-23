@@ -30,6 +30,7 @@ namespace Estudio
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxModalidade = new System.Windows.Forms.ComboBox();
             this.btnCadastrarModalidade = new System.Windows.Forms.Button();
             this.maskedTextBoxAulas = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBoxAlunos = new System.Windows.Forms.MaskedTextBox();
@@ -40,7 +41,6 @@ namespace Estudio
             this.txtBoxDescricao = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxModalidade = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,15 @@ namespace Estudio
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastrar Modalidade";
+            // 
+            // comboBoxModalidade
+            // 
+            this.comboBoxModalidade.FormattingEnabled = true;
+            this.comboBoxModalidade.Location = new System.Drawing.Point(54, 33);
+            this.comboBoxModalidade.Name = "comboBoxModalidade";
+            this.comboBoxModalidade.Size = new System.Drawing.Size(298, 21);
+            this.comboBoxModalidade.TabIndex = 11;
+            this.comboBoxModalidade.SelectedIndexChanged += new System.EventHandler(this.comboBoxModalidade_SelectedIndexChanged);
             // 
             // btnCadastrarModalidade
             // 
@@ -94,6 +103,7 @@ namespace Estudio
             this.maskedTextBoxPreco.Name = "maskedTextBoxPreco";
             this.maskedTextBoxPreco.Size = new System.Drawing.Size(294, 20);
             this.maskedTextBoxPreco.TabIndex = 7;
+            this.maskedTextBoxPreco.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBoxPreco_MaskInputRejected);
             // 
             // label5
             // 
@@ -128,6 +138,7 @@ namespace Estudio
             this.txtBoxDescricao.Name = "txtBoxDescricao";
             this.txtBoxDescricao.Size = new System.Drawing.Size(416, 20);
             this.txtBoxDescricao.TabIndex = 3;
+            this.txtBoxDescricao.TextChanged += new System.EventHandler(this.txtBoxDescricao_TextChanged);
             // 
             // label2
             // 
@@ -146,15 +157,6 @@ namespace Estudio
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nome:";
-            // 
-            // comboBoxModalidade
-            // 
-            this.comboBoxModalidade.FormattingEnabled = true;
-            this.comboBoxModalidade.Location = new System.Drawing.Point(54, 33);
-            this.comboBoxModalidade.Name = "comboBoxModalidade";
-            this.comboBoxModalidade.Size = new System.Drawing.Size(298, 21);
-            this.comboBoxModalidade.TabIndex = 11;
-            this.comboBoxModalidade.SelectedIndexChanged += new System.EventHandler(this.comboBoxModalidade_SelectedIndexChanged);
             // 
             // CadastroModalidade
             // 
